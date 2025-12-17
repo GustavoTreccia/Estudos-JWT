@@ -10,9 +10,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.devsuperior.dscatalog.dto.ProductDTO;
-import com.devsuperior.dscatalog.repositories.ProductRepository;
-import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
+import com.dev.jwtstudy.dto.ProductDTO;
+import com.dev.jwtstudy.repositories.ProductRepository;
+import com.dev.jwtstudy.services.ProductService;
+import com.dev.jwtstudy.services.exceptions.ResourceNotFoundException;
 
 @SpringBootTest
 @Transactional

@@ -24,10 +24,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import com.devsuperior.dscatalog.dto.ProductDTO;
-import com.devsuperior.dscatalog.services.ProductService;
-import com.devsuperior.dscatalog.services.exceptions.DatabaseException;
-import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
+import com.dev.jwtstudy.dto.ProductDTO;
+import com.dev.jwtstudy.resources.ProductResource;
+import com.dev.jwtstudy.services.ProductService;
+import com.dev.jwtstudy.services.exceptions.DatabaseException;
+import com.dev.jwtstudy.services.exceptions.ResourceNotFoundException;
 import com.devsuperior.dscatalog.tests.Factory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
