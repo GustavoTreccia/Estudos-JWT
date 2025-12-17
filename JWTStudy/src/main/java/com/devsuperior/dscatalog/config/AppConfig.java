@@ -18,15 +18,15 @@ public class AppConfig {
 		return new BCryptPasswordEncoder();
 	}
 
-	@Bean
-	public JwtAccessTokenConverter accessTokenConverter() {
+    @Bean
+    JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
 		tokenConverter.setSigningKey(jwtSecret); //segredo do token
 		return tokenConverter;
 	}
 
-	@Bean
-	public JwtTokenStore tokenStore() {
+    @Bean
+    JwtTokenStore tokenStore() {
 		return new JwtTokenStore(accessTokenConverter());
 	}
 	

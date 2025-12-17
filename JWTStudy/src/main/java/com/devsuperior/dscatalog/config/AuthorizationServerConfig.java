@@ -58,8 +58,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 			   .withClient("dscatalog")
 			   .secret(passwordEncoder.encode("dscatalog123"))
 			   .scopes("read","write")
-			   .authorizedGrantTypes("password")
-			   .accessTokenValiditySeconds(86400);
+			   .authorizedGrantTypes("password", "refresh_token")
+			   .accessTokenValiditySeconds(jwtDuration)
+			   .refreshTokenValiditySeconds(jwtDuration);
 	}
 
 	@Override
