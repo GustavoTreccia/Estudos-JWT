@@ -24,6 +24,12 @@ public class AuthResource {
 	@Autowired
 	private UserRepository userRepository;
 	
+	/*
+	 * Ao clicar no link do e-mail, irá chamar o endpoint auth/confirm?token=...
+	 * Irá buscar o token no banco de dados e verificar se é válido e não expirou
+	 * Se tudo estiver ok, ativa o usuário e deleta o token
+	 * */
+	
 	@GetMapping("/confirm")
 	public ResponseEntity<String> confirm(@RequestParam String token){
 		
