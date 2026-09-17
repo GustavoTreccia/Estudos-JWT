@@ -5,6 +5,7 @@ import java.time.Instant;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -67,5 +68,21 @@ public class ResourceExceptionHandler {
 	    );
 
 	    return ResponseEntity.status(status).body(err);
+	}
+
+	@ExceptionHandler({ IllegalArgumentException.class, IllegalStateException.class })
+	public ResponseEntity<StandardError> badRequest(RuntimeException e, HttpServletRequest request) {
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError(Instant.now(), status.value(), "Request error", e.getMessage(),
+				request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
+
+	@ExceptionHandler(BadCredentialsException.class)
+	public ResponseEntity<StandardError> badCredentials(BadCredentialsException e, HttpServletRequest request) {
+		HttpStatus status = HttpStatus.UNAUTHORIZED;
+		StandardError err = new StandardError(Instant.now(), status.value(), "Authentication failed", e.getMessage(),
+				request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
 	}
 }
