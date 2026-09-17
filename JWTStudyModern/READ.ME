@@ -1,0 +1,24 @@
+[LOG] Módulo Login + Cadastro com envio de e-mail de confirmação.
+
+16/09/2026
+
+Implementado 3 endpoints:
+
+Cadastro: POST /api/auth/register
+- Valida e-mail e senha (mínimo de 8 caracteres);
+- Armazena a senha com BCrypt;
+- Cria usuário inicialmente não confirmado;
+- Gera token único, com expiração de 24h;
+- Envia o link de confirmação via SMTP.
+
+Confirmação de e-mail: GET /api/auth/confirm?token=...
+
+- Confirma a conta;
+- Impede reutilização e uso de tokens expirados.
+
+Login: POST /api/auth/login
+
+- Só permite entrar após confirmação;
+- Retorna um JWT Bearer com expiração configurável.
+
+Proteção de rotas: todo endpoint fora de /api/auth/** e do console H2 exige JWT válido.
