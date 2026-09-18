@@ -12,6 +12,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.dev.second.security.JwtAuthenticationFilter;
 
+import jakarta.servlet.DispatcherType;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -22,6 +24,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                         .requestMatchers("/api/auth/**", "/h2-console/**").permitAll()
                         .anyRequest().authenticated())
                 .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))

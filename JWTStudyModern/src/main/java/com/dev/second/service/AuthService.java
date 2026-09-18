@@ -55,7 +55,7 @@ public class AuthService {
         String tokenValue = UUID.randomUUID().toString();
         ConfirmationToken token = confirmationTokenRepository.save(new ConfirmationToken(tokenValue,
                 Instant.now().plus(confirmationExpirationHours, ChronoUnit.HOURS), user));
-        emailService.sendConfirmationEmail(email, confirmationBaseUrl + token.getToken());
+        //emailService.sendConfirmationEmail(email, confirmationBaseUrl + token.getToken());
     }
 
     @Transactional
@@ -76,9 +76,9 @@ public class AuthService {
         if (!passwordEncoder.matches(request.password(), user.getPassword())) {
             throw new BadCredentialsException("E-mail ou senha inválidos");
         }
-        if (!user.isEmailConfirmed()) {
+        /*if (!user.isEmailConfirmed()) {
             throw new IllegalStateException("Confirme seu e-mail antes de entrar");
-        }
+        }*/
         return new AuthResponse(jwtService.createToken(user.getEmail()), "Bearer", jwtService.getExpirationSeconds());
     }
 
